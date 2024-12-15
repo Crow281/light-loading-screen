@@ -33,7 +33,7 @@ LoadingScreen provides the UI, allowing you to customize its state.
 awaitPromiseFunction is a utility function to manage the logic of waiting for an operation to complete.
 
 ```typescript
-import { LoadingScreen } from "@crow281/light-loading-screen";
+import { LoadingScreen, awaitPromiseFunction } from "@crow281/light-loading-screen";
 
 //Create the loading screen.
 const loadingScreen = new LoadingScreen();

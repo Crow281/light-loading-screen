@@ -2,12 +2,11 @@
     "name": "@crow281/light-loading-screen",
     "private": false,
     "license": "MIT",
-    "version": "1.0.0-rc1",
+    "version": "1.0.0",
     "keywords": [
         "light",
         "promise",
-        "loading",
-        "widget"
+        "loading"
     ],
     "description": "A simple lightweight loading screen to display an animation until everything is loaded.",
     "author": "crow281",

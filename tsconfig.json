@@ -1,0 +1,28 @@
+{
+    "include": [
+        "src"
+    ],
+    "compilerOptions": {
+        "baseUrl": "./src/",
+        "outDir": "./dist/",
+        "lib": [
+            "es2022",
+            "dom"
+        ],
+        "allowSyntheticDefaultImports": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "module": "esnext",
+        "sourceMap": true,
+        "declaration": true,
+        "declarationMap": true,
+        "emitDeclarationOnly": false,
+        "declarationDir": "dist/types",
+        "target": "es2022",
+        "jsx": "react",
+        "allowJs": true,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "node",
+        "noUnusedLocals": true
+    }
+}

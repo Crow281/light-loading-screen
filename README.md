@@ -1,5 +1,6 @@
 # light-loading-screen
 ## Introduction
+![Spinner](https://github.com/Crow281/light-loading-screen/blob/main/doc/Spinner.png)
 A library providing a simple lightweight loading screen you can display while waiting for the rest of your app to finish loading.
 
 It creates a spinner while waiting for the rest of your app to load and supports an error screen, from which you can program it to support restarting.

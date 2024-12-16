@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 import { MENU_BUTTON_ICON_SIZE, menuButton } from "Internals/MenuButton";
 
 /**
@@ -51,7 +50,7 @@ export function cancelMenuButton(): HTMLButtonElement {
     textStyle.fontSize = MENU_BUTTON_ICON_SIZE;
 
     //Give the button its label.
-    button.appendChild(text)
+    button.appendChild(text);
 
     return button;
 }

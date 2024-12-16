@@ -21,7 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import { cancelMenuButton } from "Internals/CancelMenuButton";
 import { ElementWidget } from "Internals/ElementWidget";
+import { tryAgainMenuButton } from "Internals/TryAgainMenuButton";
 import { ErrorDialog } from "Widgets/ErrorDialog";
 
 /**
@@ -79,13 +81,10 @@ export class ErrorDialogElement implements ElementWidget, ErrorDialog {
         this._element = element;
 
         //Setup the dialog root.
-        //Center the error dialog and everything in it.
         const style = element.style;
-        style.position = "absolute";
-        style.left = "50%";
-        style.top = "50%";
-        style.transform = "translate(-50%, -50%)";
-        style.textAlign = "center";
+
+        //Give it some padding.
+        style.padding = "1rem";
 
         //Create the message element.
         const messageParagraph = document.createElement("p");
@@ -94,23 +93,26 @@ export class ErrorDialogElement implements ElementWidget, ErrorDialog {
         //Add it to the dialog element.
         element.appendChild(messageParagraph);
 
-        //Add a break between the message and buttons.
-        element.appendChild(document.createElement("br"));
+        //Create container to hold buttons.
+        const menuDiv = document.createElement("div");
+
+        //Style the menu.
+        const menuDivStyle = menuDiv.style;
+
+        //Make loading screen a flexible box container.
+        menuDivStyle.display = "flex";
+
+        //Align flex children to the center horizontally.
+        menuDivStyle.justifyContent = "center";
+
+        //Add menu container to the overall element.
+        element.appendChild(menuDiv);
 
         //Create the try again button.
-        const tryAgainButton = document.createElement("button");
+        const tryAgainButton = tryAgainMenuButton();
         this._tryAgainButton = tryAgainButton;
 
-        //Try again button is invisible until callback is set.
-        tryAgainButton.hidden = true;
-
-        //Add the try again button.
-        element.append(tryAgainButton);
-
         //Setup the try again button.
-        //Use a universal unicode for cycling to represent it.
-        tryAgainButton.innerText = "🗘";
-
         //If button is clicked, trigger onTryAgain.
         tryAgainButton.onclick = (): void => {
             //Make it call the onTryAgain event.
@@ -119,19 +121,12 @@ export class ErrorDialogElement implements ElementWidget, ErrorDialog {
             this._onTryAgain();
         };
 
+        //Add the try again button.
+        menuDiv.append(tryAgainButton);
+
         //Create the cancel button.
-        const cancelButton = document.createElement("button");
+        const cancelButton = cancelMenuButton();
         this._cancelButton = cancelButton;
-
-        //Cancel button is invisible until callback is set.
-        cancelButton.hidden = true;
-
-        //Add the cancel button.
-        element.append(cancelButton);
-
-        //Setup the cancel button.
-        //Use a universal unicode for cancel to represent it.
-        cancelButton.innerText = "🗙";
 
         //If button is clicked, trigger onCancel.
         cancelButton.onclick = (): void => {
@@ -140,6 +135,9 @@ export class ErrorDialogElement implements ElementWidget, ErrorDialog {
             //even be clickable if onCancel is null.
             this._onCancel();
         };
+
+        //Add the cancel button.
+        menuDiv.append(cancelButton);
 
         //Set customizable options to their defaults.
         this.messageColor = "red";

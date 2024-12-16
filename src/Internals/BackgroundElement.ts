@@ -45,11 +45,20 @@ export class BackgroundElement implements ElementWidget, Background {
         //Fetch spinner style.
         const style = element.style;
 
+        //Make loading screen a flexible box container.
+        style.display = "flex";
+
         //Ensure loading screen remains the same regardless of how user scrolls.
         style.position = "fixed";
 
         //Make root fill the whole screen.
         style.inset = "0px";
+
+        //Align flex children to the center horizontally.
+        style.justifyContent = "center";
+
+        //Align flex children to the center vertically.
+        style.alignItems = "center";
 
         //Color the background white.
         style.background = "white";

@@ -22,45 +22,29 @@
  * THE SOFTWARE.
  */
 /**
- * Allows users to customize the {@link LoadingScreen} spinner.
+ * CSS size of menu button labels.
  */
-export interface Spinner {
-    /**
-     * @returns
-     * The CSS used to control the spinner's overall height and width.
-     * @default "3rem"
-     */
-    get size(): string;
+export const MENU_BUTTON_ICON_SIZE: string = "2rem";
 
-    /**
-     * @param size
-     * The CSS used to control the spinner's overall height and width.
-     */
-    set size(size: string);
+/**
+ * @returns
+ * Button to show in the menu.
+ */
+export function menuButton(): HTMLButtonElement {
+    //Create button.
+    const button = document.createElement("button");
 
-    /**
-     * @returns
-     * The CSS used to control the size of the spinner's border.
-     * @default "0.75rem"
-     */
-    get borderSize(): string;
+    //Button is hidden until desired.
+    button.hidden = true;
 
-    /**
-     * @param borderSize
-     * The CSS used to control the size of the spinner's border.
-     */
-    set borderSize(borderSize: string);
+    //Style the button.
+    const style = button.style;
 
-    /**
-     * @returns
-     * The CSS used to control the color of the spinner.
-     * @default "rgb(64, 150, 255)"
-     */
-    get color(): string;
+    //Create space between menu buttons.
+    style.margin = "1rem";
 
-    /**
-     * @param color
-     * The CSS used to control the color of the spinner.
-     */
-    set color(color: string);
+    //Shrink the padding between the icon and the button itself.
+    style.padding = "0.2rem";
+
+    return button;
 }

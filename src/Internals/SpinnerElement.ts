@@ -47,12 +47,6 @@ export class SpinnerElement implements ElementWidget, Spinner {
         //Fetch spinner style.
         const style = element.style;
 
-        //Center the spinner.
-        style.position = "absolute";
-        style.left = "50%";
-        style.top = "50%";
-        style.transform = "translate(-50%, -50%)";
-
         //Turn the spinner into a circle.
         style.borderRadius = "50%";
 
@@ -66,10 +60,10 @@ export class SpinnerElement implements ElementWidget, Spinner {
 
         //Setup defaults for configurable spinner properties.
         //Setup default spinner size.
-        this.size = "3em";
+        this.size = "3rem";
 
         //Setup default spinner border size.
-        this.borderSize = "0.75em";
+        this.borderSize = "0.75rem";
 
         //Setup default color.
         //This overrides the border's default color with another for

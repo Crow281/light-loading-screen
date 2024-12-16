@@ -21,46 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import { MENU_BUTTON_ICON_SIZE, menuButton } from "Internals/MenuButton";
+import { tryAgainIcon } from "Internals/TryAgainIcon";
+
 /**
- * Allows users to customize the {@link LoadingScreen} spinner.
+ * @returns
+ * A button styled for trying again.
  */
-export interface Spinner {
-    /**
-     * @returns
-     * The CSS used to control the spinner's overall height and width.
-     * @default "3rem"
-     */
-    get size(): string;
+export function tryAgainMenuButton(): HTMLButtonElement {
+    //Create the button.
+    const button = menuButton();
 
-    /**
-     * @param size
-     * The CSS used to control the spinner's overall height and width.
-     */
-    set size(size: string);
+    //Use an SVG image with a circling arrow to represent trying again.
+    const icon: SVGSVGElement = tryAgainIcon();
 
-    /**
-     * @returns
-     * The CSS used to control the size of the spinner's border.
-     * @default "0.75rem"
-     */
-    get borderSize(): string;
+    //Fetch icon's styling.
+    const iconStyle = icon.style;
 
-    /**
-     * @param borderSize
-     * The CSS used to control the size of the spinner's border.
-     */
-    set borderSize(borderSize: string);
+    //Ensure image is centered.
+    iconStyle.verticalAlign = "middle";
 
-    /**
-     * @returns
-     * The CSS used to control the color of the spinner.
-     * @default "rgb(64, 150, 255)"
-     */
-    get color(): string;
+    //Make text container a specific size to ensure it
+    //is the same as the SVG image.
+    iconStyle.width = MENU_BUTTON_ICON_SIZE;
+    iconStyle.height = MENU_BUTTON_ICON_SIZE;
 
-    /**
-     * @param color
-     * The CSS used to control the color of the spinner.
-     */
-    set color(color: string);
+    //Add icon to its button.
+    button.appendChild(icon);
+
+    return button;
 }

@@ -21,46 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
+import { MENU_BUTTON_ICON_SIZE, menuButton } from "Internals/MenuButton";
+
 /**
- * Allows users to customize the {@link LoadingScreen} spinner.
+ * @returns
+ * A button styled for cancelling.
  */
-export interface Spinner {
-    /**
-     * @returns
-     * The CSS used to control the spinner's overall height and width.
-     * @default "3rem"
-     */
-    get size(): string;
+export function cancelMenuButton(): HTMLButtonElement {
+    //Create the button.
+    const button = menuButton();
 
-    /**
-     * @param size
-     * The CSS used to control the spinner's overall height and width.
-     */
-    set size(size: string);
+    //Create button's label. We will be using "X" as
+    //a universal representation for cancel.
+    const text = document.createElement("div");
+    text.innerText = "X";
 
-    /**
-     * @returns
-     * The CSS used to control the size of the spinner's border.
-     * @default "0.75rem"
-     */
-    get borderSize(): string;
+    //Fetch the label's style
+    const textStyle = text.style;
 
-    /**
-     * @param borderSize
-     * The CSS used to control the size of the spinner's border.
-     */
-    set borderSize(borderSize: string);
+    //Set line height so that text is centered.
+    textStyle.lineHeight = MENU_BUTTON_ICON_SIZE;
 
-    /**
-     * @returns
-     * The CSS used to control the color of the spinner.
-     * @default "rgb(64, 150, 255)"
-     */
-    get color(): string;
+    //Give text container size for icons.
+    textStyle.width = MENU_BUTTON_ICON_SIZE;
+    textStyle.height = MENU_BUTTON_ICON_SIZE;
 
-    /**
-     * @param color
-     * The CSS used to control the color of the spinner.
-     */
-    set color(color: string);
+    //Give text its own size.
+    textStyle.fontSize = MENU_BUTTON_ICON_SIZE;
+
+    //Give the button its label.
+    button.appendChild(text)
+
+    return button;
 }

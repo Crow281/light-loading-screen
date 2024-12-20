@@ -1,7 +1,7 @@
 {
     "name": "i18next-autocomplete",
     "private": true,
-    "version": "0.1.0",
+    "version": "1.0.0",
     "type": "module",
     "scripts": {
         "lint": "eslint .",
@@ -11,7 +11,7 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "@crow281/light-loading-screen": "^1.0.0",
+        "@crow281/light-loading-screen": "^1.1.0",
         "@emotion/react": "^11.13.5",
         "@emotion/styled": "^11.13.5",
         "@mui/icons-material": "^6.1.9",

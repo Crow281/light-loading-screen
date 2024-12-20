@@ -45,7 +45,7 @@ import { LoadingScreen } from "Widgets/LoadingScreen";
  * error message and give the user the option to try again, which will
  * result in importMainMenuModule again being called.
  * ```typescript
- * //Import the packages we need.
+ * //Import the modules we need.
  * import { LoadingScreen, awaitPromiseFunction } from "@crow281/light-loading-screen";
  *
  * //Create the new loading screen.

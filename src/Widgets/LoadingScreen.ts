@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { BackgroundElement } from "Internals/BackgroundElement";
-import { ErrorDialogElement } from "Internals/ErrorDialogElement";
-import { SpinnerElement } from "Internals/SpinnerElement";
+import { BackgroundElement } from "Internals/Widgets/BackgroundElement";
+import { ErrorDialogElement } from "Internals/Widgets/ErrorDialogElement";
+import { SpinnerElement } from "Internals/Widgets/SpinnerElement";
 import { Background } from "Widgets/Background";
 import { ErrorDialog } from "Widgets/ErrorDialog";
 import { LoadingScreenState } from "Widgets/LoadingScreenState";
@@ -65,7 +65,12 @@ export class LoadingScreen {
     /**
      * Displays error and potentially lets you try again.
      */
-    private _errorDialog: ErrorDialogElement;
+    private readonly _errorDialog: ErrorDialogElement;
+
+    /**
+     * List of listeners wanting to know when visibility changes.
+     */
+    private readonly _onVisibleListeners: ((visible: boolean) => void)[] = [];
 
     /**
      * Current state of the loading screen.
@@ -90,6 +95,15 @@ export class LoadingScreen {
 
         //Initialize loading screen to spinner state.
         this.state = LoadingScreenState.Spinner;
+    }
+
+    /**
+     * @returns
+     * Highest ranking parent of all HTML elements the loading screen is
+     * made from.
+     */
+    public get root(): HTMLElement {
+        return this._background.element;
     }
 
     /**
@@ -155,6 +169,53 @@ export class LoadingScreen {
 
             //Remove it from its parent.
             root.parentElement.removeChild(root);
+        }
+
+        //Fire listeners with the new value of visible.
+        for (const listener of this._onVisibleListeners) {
+            listener(visible);
+        }
+    }
+
+    /**
+     *
+     * @param listener
+     * A listener that will be fired whenever
+     * the value of property visible is changed.
+     */
+    public addVisibleListener(listener: (visible: boolean) => void): void {
+        //Add to array of listeners.
+        this._onVisibleListeners.push(listener);
+    }
+
+    /**
+     *
+     * @param listener
+     * A listener that should stop listening on visibility.
+     * @returns
+     * true if listener was removed, false if listener does not exist.
+     */
+    public removeVisibleListener(
+        listener: (visible: boolean) => void,
+    ): boolean {
+        //Fetch array of listeners.
+        const listeners = this._onVisibleListeners;
+
+        //Search for listener.
+        const index = listeners.indexOf(listener);
+
+        //If listener does not exist.
+        if (index === -1) {
+            //Tell user it does not exist.
+            return false;
+
+            //If listener exists.
+        } else {
+            //Erase listener from the array.
+            listeners.splice(index, 1);
+
+            //Tell user it was removed.
+            return true;
         }
     }
 

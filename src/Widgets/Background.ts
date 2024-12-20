@@ -28,7 +28,7 @@ export interface Background {
     /**
      * @returns
      * CSS used to control the z-index of the background element.
-     * @default ""
+     * @default "1000"
      */
     get zIndex(): string;
 

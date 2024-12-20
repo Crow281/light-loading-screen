@@ -23,67 +23,45 @@
  */
 /**
  * @returns
- * An SVG image with a try again icon in the form of a circling arrow.
+ * An SVG image with a cancel icon in the form of an "X".
  */
-export function tryAgainIcon(): SVGSVGElement {
+export function cancelIcon(): SVGSVGElement {
     //Create the parent SVG image tag.
     const svgImage: SVGSVGElement = document.createElementNS(
         "http://www.w3.org/2000/svg",
         "svg",
     );
 
-    //Give svg image its size.
-    svgImage.setAttribute("width", "24");
-    svgImage.setAttribute("height", "24");
-
-    //Set the view box to the correct offset.
-    //The circling line is 16x16, but we need some padding for the arrow.
-    //Give it 4 pixels of padding on each side.
+    //Set the view box, which controls which part of the SVG to view.
     const viewBoxValue = svgImage.viewBox.baseVal;
 
-    //Left and upper padding.
-    viewBoxValue.x = -4;
-    viewBoxValue.y = -4;
+    //Offset of the view box.
+    viewBoxValue.x = 0;
+    viewBoxValue.y = 0;
 
+    //Size of the viewbox.
     //16(icon) + 4 * 2(padding) = 24.
     viewBoxValue.width = 24;
     viewBoxValue.height = 24;
 
-    //Create the path element representing the circling line.
-    const circlePath: SVGPathElement = document.createElementNS(
+    //Create the path element representing the X.
+    const path: SVGPathElement = document.createElementNS(
         "http://www.w3.org/2000/svg",
         "path",
     );
 
-    //Tell the path how to draw a circling arrow.
-    circlePath.setAttribute(
-        "d",
-        "M 13.656854249,13.656854249 A 8,8 0 1 1 16,8",
-    );
+    //Tell the path how to draw the x.
+    //Use 4 pixels of padding on each side.
+    path.setAttribute("d", "M 4,4 L 20,20 M 20,4 L 4,20");
 
-    //Make circlePath just a line.
-    circlePath.setAttribute("fill", "none");
+    //Give path its default line color.
+    path.setAttribute("stroke", "black");
 
-    //Give arrow its default line color.
-    circlePath.setAttribute("stroke", "black");
+    //Make path's line thicker.
+    path.setAttribute("stroke-width", "2");
 
-    //Make circlePath's line thicker.
-    circlePath.setAttribute("stroke-width", "2");
-
-    //Add the circling line to the svg.
-    svgImage.appendChild(circlePath);
-
-    //Create the path element representing the arrow.
-    const arrowPath: SVGPathElement = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "path",
-    );
-
-    //Tell the path how to draw an arrow.
-    arrowPath.setAttribute("d", "M 21,6 L 16,10 L 11,6");
-
-    //Add the arrow to the svg.
-    svgImage.appendChild(arrowPath);
+    //Add the path to the SVG.
+    svgImage.appendChild(path);
 
     return svgImage;
 }

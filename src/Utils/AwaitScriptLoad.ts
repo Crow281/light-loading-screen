@@ -56,7 +56,7 @@ import { LoadingScreenState } from "Widgets/LoadingScreenState";
  * ```
  * ```typescript
  * //LoadLoadingScreen.ts -> LoadLoadingScreen.js after compiling.
- * //Import the packages we need.
+ * //Import the modules we need.
  * import { LoadingScreen, awaitScriptLoad } from "@crow281/light-loading-screen";
  *
  * //Create the new loading screen.

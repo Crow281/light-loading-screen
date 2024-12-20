@@ -21,36 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { MENU_BUTTON_ICON_SIZE, menuButton } from "Internals/MenuButton";
+/**
+ * CSS size of menu button labels.
+ */
+export const MENU_BUTTON_ICON_SIZE: string = "2rem";
 
 /**
  * @returns
- * A button styled for cancelling.
+ * Button to show in the menu.
  */
-export function cancelMenuButton(): HTMLButtonElement {
-    //Create the button.
-    const button = menuButton();
+export function menuButton(icon: SVGSVGElement): HTMLButtonElement {
+    //Create button.
+    const button = document.createElement("button");
 
-    //Create button's label. We will be using "X" as
-    //a universal representation for cancel.
-    const text = document.createElement("div");
-    text.innerText = "X";
+    //Button is hidden until desired.
+    button.hidden = true;
 
-    //Fetch the label's style
-    const textStyle = text.style;
+    //Style the button.
+    const style = button.style;
 
-    //Set line height so that text is centered.
-    textStyle.lineHeight = MENU_BUTTON_ICON_SIZE;
+    //Create space between menu buttons.
+    style.margin = "1rem";
 
-    //Give text container size for icons.
-    textStyle.width = MENU_BUTTON_ICON_SIZE;
-    textStyle.height = MENU_BUTTON_ICON_SIZE;
+    //Shrink the padding between the icon and the button itself.
+    style.padding = "0.2rem";
 
-    //Give text its own size.
-    textStyle.fontSize = MENU_BUTTON_ICON_SIZE;
+    //Fetch icon's styling.
+    const iconStyle = icon.style;
 
-    //Give the button its label.
-    button.appendChild(text);
+    //Ensure image is centered.
+    iconStyle.verticalAlign = "middle";
+
+    //Make text container a specific size to ensure it
+    //is the same as the SVG image.
+    iconStyle.width = MENU_BUTTON_ICON_SIZE;
+    iconStyle.height = MENU_BUTTON_ICON_SIZE;
+
+    //Add icon to its button.
+    button.appendChild(icon);
 
     return button;
 }

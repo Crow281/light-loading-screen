@@ -21,7 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { LoadingScreen, awaitPromise } from "@crow281/light-loading-screen";
+import {
+    LoadingScreen,
+    awaitPromise,
+    swapBodyOnVisibleChange,
+} from "@crow281/light-loading-screen";
 
 /**
  * Creates a loading screen and displays the spinner animation
@@ -31,6 +35,13 @@ import { LoadingScreen, awaitPromise } from "@crow281/light-loading-screen";
 export function oneOffDemo() {
     //Create the loading screen we will be showing to user.
     const loadingScreen = new LoadingScreen();
+
+    //Set the loading screen to disable other DOM elements until it is finished.
+    //LoadingScreen is primarily intended for app initialization,
+    //but in the event you do want to use it for more, this utility makes
+    //it easier to ensure the rest of the UI doesn't interfere with
+    //the loading screen.
+    swapBodyOnVisibleChange(loadingScreen);
 
     //Executor for a promise that will delay for a bit.
     const delayExecutor = (

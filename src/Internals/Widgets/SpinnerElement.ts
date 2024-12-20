@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { ElementWidget } from "Internals/ElementWidget";
+import { ElementWidget } from "Internals/Widgets/ElementWidget";
 import { Spinner } from "Widgets/Spinner";
 
 /**

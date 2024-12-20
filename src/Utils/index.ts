@@ -32,3 +32,5 @@
 export * from "./AwaitPromise";
 export * from "./AwaitPromiseFunction";
 export * from "./AwaitScriptLoad";
+export * from "./SwapBodyOnVisibleChange";
+export * from "./SwapElementsOnVisibleChange";

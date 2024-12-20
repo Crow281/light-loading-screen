@@ -24,7 +24,11 @@
 /**
  * Source code for the one off demo.
  */
-export const tryAgainTSCode: string = `import { awaitPromiseFunction, LoadingScreen } from "@crow281/light-loading-screen";
+export const tryAgainTSCode: string = `import {
+    LoadingScreen,
+    awaitPromiseFunction,
+    swapBodyOnVisibleChange,
+} from "@crow281/light-loading-screen";
 
 /**
  * Creates a promise that will trigger resolve after
@@ -36,17 +40,14 @@ function delayResolve(delay: number): Promise<void> {
     //Executor for a promise that will delay for a bit.
     const delayExecutor = (
         resolve: () => void,
-        reject: (reason: unknown) => void
+        reject: (reason: unknown) => void,
     ): void => {
         //Create a timeout that will trigger after delay.
-        setTimeout(
-            (): void => {
-                //After the timeout, end the promise.
-                resolve();
-            },
-            delay
-        )
-    }
+        setTimeout((): void => {
+            //After the timeout, end the promise.
+            resolve();
+        }, delay);
+    };
 
     //Create a promise that will delay for a bit.
     return new Promise(delayExecutor);
@@ -62,17 +63,14 @@ function delayReject(delay: number): Promise<void> {
     //Executor for a promise that will delay for a bit.
     const delayExecutor = (
         resolve: () => void,
-        reject: (reason: unknown) => void
+        reject: (reason: unknown) => void,
     ): void => {
         //Create a timeout that will trigger after delay.
-        setTimeout(
-            (): void => {
-                //After the timeout, end the promise with a fake error.
-                reject(new Error("Something went terribly wrong!"));
-            },
-            delay
-        )
-    }
+        setTimeout((): void => {
+            //After the timeout, end the promise with a fake error.
+            reject(new Error("Something went terribly wrong!"));
+        }, delay);
+    };
 
     //Create a promise that will delay for a bit.
     return new Promise(delayExecutor);
@@ -87,6 +85,13 @@ export function tryAgainDemo() {
     //Create the loading screen we will be showing to user.
     const loadingScreen = new LoadingScreen();
 
+    //Set the loading screen to disable other DOM elements until it is finished.
+    //LoadingScreen is primarily intended for app initialization,
+    //but in the event you do want to use it for more, this utility makes
+    //it easier to ensure the rest of the UI doesn't interfere with
+    //the loading screen.
+    swapBodyOnVisibleChange(loadingScreen);
+
     //By default, awaitPromiseFunction will just keep forcing the user to.
     //try again. By setting onCancel, this will make the cancel button
     //visible and give the user the option to give up early.
@@ -94,12 +99,12 @@ export function tryAgainDemo() {
         //If the user clicked the cancel button,
         //turn off the loading screen.
         loadingScreen.visible = false;
-    }
+    };
 
     //Since we are generating a fake error,
     //record whether we have returned it yet or not.
     let firstTime: boolean = true;
-    
+
     //A function that will try the operation until we succeed.
     //In this specific case, we will intentionally fail and then succeed.
     const createPromise = (): Promise<void> => {
@@ -116,12 +121,9 @@ export function tryAgainDemo() {
             //Succeed after a timeout.
             return delayResolve(3000);
         }
-    }
-    
+    };
+
     //Display loading screen and turn it off as soon as promise finishes.
-    awaitPromiseFunction(
-        loadingScreen,
-        createPromise
-    );
+    awaitPromiseFunction(loadingScreen, createPromise);
 }
 `;

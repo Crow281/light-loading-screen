@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { ElementWidget } from "Internals/ElementWidget";
+import { ElementWidget } from "Internals/Widgets/ElementWidget";
 import { Background } from "Widgets/Background";
 
 /**
@@ -45,14 +45,18 @@ export class BackgroundElement implements ElementWidget, Background {
         //Fetch spinner style.
         const style = element.style;
 
+        //Give it a high z index.
+        style.zIndex = "1000";
+
         //Make loading screen a flexible box container.
         style.display = "flex";
 
         //Ensure loading screen remains the same regardless of how user scrolls.
+        //Note that "fixed" does not work on mobile.
         style.position = "fixed";
 
         //Make root fill the whole screen.
-        style.inset = "0px";
+        style.inset = "0";
 
         //Align flex children to the center horizontally.
         style.justifyContent = "center";

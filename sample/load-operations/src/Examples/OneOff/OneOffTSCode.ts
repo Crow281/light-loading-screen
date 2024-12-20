@@ -24,7 +24,11 @@
 /**
  * Source code for the one off demo.
  */
-export const oneOffTSCode: string = `import { awaitPromise, LoadingScreen } from "@crow281/light-loading-screen";
+export const oneOffTSCode: string = `import {
+    LoadingScreen,
+    awaitPromise,
+    swapBodyOnVisibleChange,
+} from "@crow281/light-loading-screen";
 
 /**
  * Creates a loading screen and displays the spinner animation
@@ -34,29 +38,30 @@ export const oneOffTSCode: string = `import { awaitPromise, LoadingScreen } from
 export function oneOffDemo() {
     //Create the loading screen we will be showing to user.
     const loadingScreen = new LoadingScreen();
-    
+
+    //Set the loading screen to disable other DOM elements until it is finished.
+    //LoadingScreen is primarily intended for app initialization,
+    //but in the event you do want to use it for more, this utility makes
+    //it easier to ensure the rest of the UI doesn't interfere with
+    //the loading screen.
+    swapBodyOnVisibleChange(loadingScreen);
+
     //Executor for a promise that will delay for a bit.
     const delayExecutor = (
         resolve: () => void,
-        reject: (reason: unknown) => void
+        reject: (reason: unknown) => void,
     ): void => {
         //Create a timeout that will trigger in 3 seconds (or 3000 millis).
-        setTimeout(
-            (): void => {
-                //After the timeout, end the promise.
-                resolve();
-            },
-            3000
-        )
-    }
+        setTimeout((): void => {
+            //After the timeout, end the promise.
+            resolve();
+        }, 3000);
+    };
 
     //Create a promise that will delay for a bit.
     const delayPromise: Promise<void> = new Promise(delayExecutor);
-    
+
     //Display loading screen and turn it off as soon as promise finishes.
-    awaitPromise(
-        loadingScreen,
-        delayPromise
-    );
+    awaitPromise(loadingScreen, delayPromise);
 }
 `;

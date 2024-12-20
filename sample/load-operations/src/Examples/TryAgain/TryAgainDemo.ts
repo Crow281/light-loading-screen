@@ -24,6 +24,7 @@
 import {
     LoadingScreen,
     awaitPromiseFunction,
+    swapBodyOnVisibleChange,
 } from "@crow281/light-loading-screen";
 
 /**
@@ -80,6 +81,13 @@ function delayReject(delay: number): Promise<void> {
 export function tryAgainDemo() {
     //Create the loading screen we will be showing to user.
     const loadingScreen = new LoadingScreen();
+
+    //Set the loading screen to disable other DOM elements until it is finished.
+    //LoadingScreen is primarily intended for app initialization,
+    //but in the event you do want to use it for more, this utility makes
+    //it easier to ensure the rest of the UI doesn't interfere with
+    //the loading screen.
+    swapBodyOnVisibleChange(loadingScreen);
 
     //By default, awaitPromiseFunction will just keep forcing the user to.
     //try again. By setting onCancel, this will make the cancel button

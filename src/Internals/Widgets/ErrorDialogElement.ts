@@ -21,9 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { cancelMenuButton } from "Internals/CancelMenuButton";
-import { ElementWidget } from "Internals/ElementWidget";
-import { tryAgainMenuButton } from "Internals/TryAgainMenuButton";
+import { cancelIcon } from "Internals/Icons/CancelIcon";
+import { tryAgainIcon } from "Internals/Icons/TryAgainIcon";
+import { ElementWidget } from "Internals/Widgets/ElementWidget";
+import { menuButton } from "Internals/Widgets/MenuButton";
 import { ErrorDialog } from "Widgets/ErrorDialog";
 
 /**
@@ -109,7 +110,7 @@ export class ErrorDialogElement implements ElementWidget, ErrorDialog {
         element.appendChild(menuDiv);
 
         //Create the try again button.
-        const tryAgainButton = tryAgainMenuButton();
+        const tryAgainButton = menuButton(tryAgainIcon());
         this._tryAgainButton = tryAgainButton;
 
         //Setup the try again button.
@@ -125,7 +126,7 @@ export class ErrorDialogElement implements ElementWidget, ErrorDialog {
         menuDiv.append(tryAgainButton);
 
         //Create the cancel button.
-        const cancelButton = cancelMenuButton();
+        const cancelButton = menuButton(cancelIcon());
         this._cancelButton = cancelButton;
 
         //If button is clicked, trigger onCancel.

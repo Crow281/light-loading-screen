@@ -48,7 +48,7 @@ import { LoadingScreen, LoadingScreenState } from "Widgets";
  * Thanks to setting {@link ErrorDialog.onCancel}, it is possible
  * for the user to give up.
  * ```typescript
- * //Import the packages we need.
+ * //Import the modules we need.
  * import { LoadingScreen, awaitPromiseFunction } from "@crow281/light-loading-screen";
  *
  * //Create the new loading screen.

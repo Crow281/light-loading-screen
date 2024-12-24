@@ -71,7 +71,7 @@ import { LoadingScreen } from "Widgets/LoadingScreen";
  *
  * //Activate the loading screen and wait for importMainMenuModule to succeed.
  * //User can keep trying again until it succeeds,
- * //but we don't support cancelling.
+ * //but cancelling has not been enabled.
  * awaitPromiseFunction(
  *     loadingScreen,
  *     importMainMenuModule,

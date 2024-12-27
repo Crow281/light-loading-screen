@@ -6,6 +6,7 @@ import {
 //Create the loading screen UI.
 const loadingScreen = new LoadingScreen();
 
+//Imports the application.
 const promiseFunction = (): Promise<unknown> => {
     return import("./main.tsx");
 };

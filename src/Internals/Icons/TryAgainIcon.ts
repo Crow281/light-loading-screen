@@ -32,19 +32,11 @@ export function tryAgainIcon(): SVGSVGElement {
         "svg",
     );
 
-    //Set the view box to the correct offset.
-    //The circling line is 16x16, but we need some padding for the arrow.
-    //Give it 4 pixels of padding on each side.
-    const viewBoxValue = svgImage.viewBox.baseVal;
-
-    //Offset of the view box.
-    viewBoxValue.x = -4;
-    viewBoxValue.y = -4;
-
-    //Size of the viewbox.
-    //16(icon) + 4 * 2(padding) = 24.
-    viewBoxValue.width = 24;
-    viewBoxValue.height = 24;
+    //Set the view box, which controls which part of the SVG to view.
+    //Since the the circle and origin are shared,
+    //but we need space for the arrow, offset is -4, -4.
+    //Size = 16(icon) + 4 * 2(padding) = 24.
+    svgImage.setAttribute("viewBox", "-4 -4 24 24");
 
     //Create the path element representing the circling line.
     const circlePath: SVGPathElement = document.createElementNS(

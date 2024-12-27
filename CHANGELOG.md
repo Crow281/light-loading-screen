@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.1] 2024-12-26
+
+### Fixed
+
+- Setting SVG's viewbox directly via JavaScript for CancelIcon.ts and TryAgainIcon.ts doesn't work on Firefox. Has been replaced with setAttribute.
+
 ## [1.1.0] 2024-12-19
 
 ### Added

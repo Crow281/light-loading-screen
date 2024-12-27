@@ -33,16 +33,9 @@ export function cancelIcon(): SVGSVGElement {
     );
 
     //Set the view box, which controls which part of the SVG to view.
-    const viewBoxValue = svgImage.viewBox.baseVal;
-
-    //Offset of the view box.
-    viewBoxValue.x = 0;
-    viewBoxValue.y = 0;
-
-    //Size of the viewbox.
-    //16(icon) + 4 * 2(padding) = 24.
-    viewBoxValue.width = 24;
-    viewBoxValue.height = 24;
+    //Offset simply starts from the origin.
+    //Size = 16(icon) + 4 * 2(padding) = 24.
+    svgImage.setAttribute("viewBox", "0 0 24 24");
 
     //Create the path element representing the X.
     const path: SVGPathElement = document.createElementNS(
